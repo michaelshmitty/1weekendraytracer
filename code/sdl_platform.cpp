@@ -12,7 +12,7 @@
 
 const char *WindowTitle = "Ray Tracing in a Weekend";
 
-const uint32_t TARGET_FRAME_RATE = 30;
+const uint32_t TARGET_FRAME_RATE = 15;
 const uint32_t TICKS_PER_FRAME = 1000 / TARGET_FRAME_RATE;
 const uint32_t WINDOW_WIDTH = 500;
 const uint32_t WINDOW_HEIGHT = 250;

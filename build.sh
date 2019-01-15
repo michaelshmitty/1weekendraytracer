@@ -1,7 +1,7 @@
 #!/bin/sh
 mkdir -p build
 pushd build
-rm -rf *
+rm -rf sdl_platform.dSYM
 
 # Plugin library
 c++ -Wall -std=c++11 -c -fpic -g ../code/rt_weekend.cpp -o librt_weekend.o
