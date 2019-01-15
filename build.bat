@@ -4,8 +4,6 @@ set PlatformCompilerFlags=/I ..\lib\SDL2\include
 set CommonLinkerFlags=-incremental:no -opt:ref
 set PlatformLinkerFlags=/LIBPATH:..\lib\SDL2\lib\x64 /SUBSYSTEM:CONSOLE SDL2.lib SDL2main.lib
 
-REM call  "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" x86_amd64
-
 cls
 if not exist "build" mkdir build
 pushd build
