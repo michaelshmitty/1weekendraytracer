@@ -38,8 +38,8 @@ PluginUpdateAndRender(plugin_offscreen_buffer *Buffer)
             float r = float(X) / float(Buffer->Width);
             float g = float(Y) / float(Buffer->Height);
             float b = 0.2;
-            int ig = int(255.99 * r);
-            int ir = int(255.99 * g);
+            int ir = int(255.99 * r);
+            int ig = int(255.99 * g);
             int ib = int(255.99 * b);
 
             *Pixel++ = (ir << 24) + (ig << 16) + (ib << 8) + 0xFF;
