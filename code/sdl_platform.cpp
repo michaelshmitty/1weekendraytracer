@@ -8,7 +8,7 @@
 #include <errno.h>
 #include <dlfcn.h>
 
-#include "platform.h"
+#include "sdl_platform.h"
 
 const char *WindowTitle = "Ray Tracing in a Weekend";
 

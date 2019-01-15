@@ -1,5 +1,5 @@
-#ifndef PLATFORM_H
-#define PLATFORM_H
+#ifndef SDL_PLATFORM_H
+#define SDL_PLATFORM_H
 
 typedef void plugin_update_and_render(plugin_offscreen_buffer *Buffer);
 

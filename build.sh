@@ -9,5 +9,5 @@ c++ -shared -o librt_weekend.so librt_weekend.o
 rm librt_weekend.o
 
 # Platform layer host application
-c++ -Wall -std=c++11 -g ../code/platform.cpp -o platform `sdl2-config --libs --cflags`
+c++ -Wall -std=c++11 -g ../code/sdl_platform.cpp -o sdl_platform `sdl2-config --libs --cflags`
 popd

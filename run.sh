@@ -1,4 +1,4 @@
 #!/bin/sh
 pushd build
-./platform
+./sdl_platform
 popd
