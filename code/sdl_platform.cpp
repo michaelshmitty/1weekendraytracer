@@ -248,6 +248,7 @@ int main()
 
     bool FirstFrame = true;
     uint32_t LastRenderedTime = 0;
+    bool ForceRenderFrame = false;
 
     // Main loop
     while (Running)
@@ -260,6 +261,7 @@ int main()
         {
             SDLUnloadPluginCode(&Plugin);
             Plugin = SDLLoadPluginCode(PluginLibraryFilename);
+            ForceRenderFrame = true;
         }
 
         SDL_Event Event;
@@ -287,10 +289,11 @@ int main()
         Buffer.Height = GlobalBackbuffer.Height;
         Buffer.Pitch = GlobalBackbuffer.Pitch;
 
-        if (FirstFrame || Input.MouseDown)
+        if (FirstFrame || ForceRenderFrame || Input.MouseDown)
         {
             LastRenderedTime = SDL_GetTicks();
             Plugin.UpdateAndRender(&Buffer, &Input);
+            ForceRenderFrame = false;
         }
         FirstFrame = false;
 
