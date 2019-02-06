@@ -14,13 +14,13 @@ const char *WindowTitle = "Ray Tracing in a Weekend";
 
 const uint32_t TARGET_FRAME_RATE = 10;
 const uint32_t TICKS_PER_FRAME = 1000 / TARGET_FRAME_RATE;
-const uint32_t WINDOW_WIDTH = 500;
-const uint32_t WINDOW_HEIGHT = 250;
+const uint32_t WINDOW_WIDTH = 1000;
+const uint32_t WINDOW_HEIGHT = 500;
 
 global_variable bool Running = true;
 global_variable sdl_offscreen_buffer GlobalBackbuffer;
 
-void PluginUpdateAndRenderStub(plugin_offscreen_buffer *Buffer)
+void PluginUpdateAndRenderStub(plugin_offscreen_buffer *Buffer, plugin_input *Input)
 {
 }
 
@@ -79,7 +79,7 @@ SDLUpdateWindow(SDL_Renderer *Renderer,
 }
 
 internal void
-HandleEvent(SDL_Event *Event)
+HandleEvent(SDL_Event *Event, plugin_input *Input)
 {
     switch(Event->type)
     {
@@ -100,6 +100,32 @@ HandleEvent(SDL_Event *Event)
                 } break;
             }
         }
+
+        case SDL_MOUSEMOTION:
+        {
+            // printf("We got a motion event.\n");
+            // printf("Current mouse position is: (%d, %d)\n",
+            //        Event->motion.x,
+            //        Event->motion.y);
+            Input->MouseX = Event->motion.x;
+            Input->MouseY = Event->motion.y;
+
+        } break;
+
+        case SDL_MOUSEBUTTONDOWN:
+        {
+            Input->MouseDown = true;
+        } break;
+
+        case SDL_MOUSEBUTTONUP:
+        {
+            Input->MouseDown = false;
+        } break;
+
+        default:
+        {
+            // printf("Unhandled event!\n");
+        } break;
     }
 }
 
@@ -217,6 +243,12 @@ int main()
     const char *PluginLibraryFilename = "librt_weekend.so";
     sdl_plugin_code Plugin = SDLLoadPluginCode(PluginLibraryFilename);
 
+    // Keep track of input
+    plugin_input Input = {};
+
+    bool FirstFrame = true;
+    uint32_t LastRenderedTime = 0;
+
     // Main loop
     while (Running)
     {
@@ -233,18 +265,19 @@ int main()
         SDL_Event Event;
         while (SDL_PollEvent(&Event))
         {
-            HandleEvent(&Event);
+            HandleEvent(&Event, &Input);
         }
 
         // Display rendering information in Window title
         char WindowTitleBuffer[512];
         sprintf(WindowTitleBuffer,
-                "%s - %d x %d - %u fps - %d frames missed",
+                "%s - %d x %d - %u fps - %d frames missed - Last rendered: %d",
                 WindowTitle,
                 WINDOW_WIDTH,
                 WINDOW_HEIGHT,
                 CurrentFPS,
-                FramesMissed);
+                FramesMissed,
+                LastRenderedTime);
 
         SDL_SetWindowTitle(Window, WindowTitleBuffer);
 
@@ -253,7 +286,13 @@ int main()
         Buffer.Width = GlobalBackbuffer.Width;
         Buffer.Height = GlobalBackbuffer.Height;
         Buffer.Pitch = GlobalBackbuffer.Pitch;
-        Plugin.UpdateAndRender(&Buffer);
+
+        if (FirstFrame || Input.MouseDown)
+        {
+            LastRenderedTime = SDL_GetTicks();
+            Plugin.UpdateAndRender(&Buffer, &Input);
+        }
+        FirstFrame = false;
 
         SDLUpdateWindow(Renderer, GlobalBackbuffer);
 

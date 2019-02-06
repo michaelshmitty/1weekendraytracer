@@ -19,4 +19,11 @@ struct plugin_offscreen_buffer
     int Pitch;
 };
 
+struct plugin_input
+{
+    uint32_t MouseX;
+    uint32_t MouseY;
+    bool MouseDown;
+};
+
 #endif

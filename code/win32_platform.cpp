@@ -20,7 +20,7 @@ const uint32_t WINDOW_HEIGHT = 250;
 global_variable bool Running = true;
 global_variable sdl_offscreen_buffer GlobalBackbuffer;
 
-void PluginUpdateAndRenderStub(plugin_offscreen_buffer *Buffer)
+void PluginUpdateAndRenderStub(plugin_offscreen_buffer *Buffer, plugin_input *Input)
 {
 }
 

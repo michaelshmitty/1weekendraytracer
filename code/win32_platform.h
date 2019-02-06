@@ -1,7 +1,7 @@
 #ifndef WIN32_PLATFORM_H
 #define WIN32_PLATFORM_H
 
-typedef void plugin_update_and_render(plugin_offscreen_buffer *Buffer);
+typedef void plugin_update_and_render(plugin_offscreen_buffer *Buffer, plugin_input *Input);
 
 struct sdl_plugin_code
 {

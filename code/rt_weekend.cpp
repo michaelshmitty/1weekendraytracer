@@ -3,6 +3,7 @@
 #include "sphere.h"
 #include "target_list.h"
 #include "camera.h"
+#include <stdio.h>
 
 vec3 color(const ray &r, target *world)
 {
@@ -21,7 +22,7 @@ vec3 color(const ray &r, target *world)
 
 extern "C"
 void
-PluginUpdateAndRender(plugin_offscreen_buffer *Buffer)
+PluginUpdateAndRender(plugin_offscreen_buffer *Buffer, plugin_input *Input)
 {
     int ns = 1;
     int Pitch = Buffer->Pitch;
