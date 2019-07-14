@@ -1,6 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 #define SDL_MAIN_HANDLED
-#include "rt_weekend.h"
+#include "../rt_weekend.h"
 
 #include <windows.h>
 #include <SDL.h>

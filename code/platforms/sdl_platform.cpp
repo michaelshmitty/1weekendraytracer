@@ -1,6 +1,6 @@
-#include "rt_weekend.h"
+#include "../rt_weekend.h"
 
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include <stdio.h>
 #include <sys/mman.h>
 #include <stdbool.h>
@@ -14,8 +14,8 @@ const char *WindowTitle = "Ray Tracing in a Weekend";
 
 const uint32_t TARGET_FRAME_RATE = 10;
 const uint32_t TICKS_PER_FRAME = 1000 / TARGET_FRAME_RATE;
-const uint32_t WINDOW_WIDTH = 1000;
-const uint32_t WINDOW_HEIGHT = 500;
+const uint32_t WINDOW_WIDTH = 500;
+const uint32_t WINDOW_HEIGHT = 250;
 
 global_variable bool Running = true;
 global_variable sdl_offscreen_buffer GlobalBackbuffer;
